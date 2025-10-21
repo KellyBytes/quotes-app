@@ -1,8 +1,16 @@
 # Quotes App
 
-## Features:
+## Overview
+A responsive quotes app that shows famous quotes.
 
-- get random quotes
-- add to or remove from favourites
+### Features
 
-<img src="./quotes-app.png" width="50%">
+- Get random quotes
+- Add to or remove from favourites
+- Responsive design
+
+---
+
+## Screenshots
+
+<img src="./public/images/quotes-app.png" width="300px">

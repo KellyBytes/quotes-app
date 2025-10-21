@@ -7,27 +7,28 @@
 }
 
 .quotes-app {
-  width: 90vmin;
+  width: clamp(19.375rem, 80vw, 38rem);
+  /* max-height: 80vh; */
   aspect-ratio: 3/2;
   background-color: #212226;
-  border-radius: 3rem;
-  padding: 4rem;
-  box-shadow: -2rem 2rem 6rem rgba(0, 0, 0, 0.6);
+  border-radius: 1.8rem;
+  padding: 2.5rem;
+  box-shadow: -1.25rem 1.25rem 3.75rem rgba(0, 0, 0, 0.6);
   position: relative;
   overflow: hidden;
 }
 
 .app-heading {
   font-family: "Bebas Neue", sans-serif;
-  font-size: 5rem;
+  font-size: clamp(2rem, 1.8rem + 1vw, 3rem);
   color: #ddd;
 }
 
 .fav-icon {
   position: absolute;
-  top: 5rem;
-  right: 5rem;
-  font-size: 4rem;
+  top: 3rem;
+  right: 3rem;
+  font-size: clamp(2rem, 1.8rem + 1vw, 3rem);
   background-image: linear-gradient(to left, #2e6f79, #1b9b96) !important;
   color: transparent;
   -webkit-background-clip: text;
@@ -35,11 +36,11 @@
   /* background-clip: text;
   display: inline-block; */
   cursor: pointer;
-  text-shadow: -0.3rem 0.5rem 2rem rgba(27, 155, 150, 0.6);
+  text-shadow: -0.2rem 0.3rem 1.25rem rgba(27, 155, 150, 0.6);
 }
 
 .fav-icon:active {
-  transform: translateY(0.1rem);
+  transform: translateY(2px);
 }
 
 .quote {
@@ -49,26 +50,26 @@
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
+  row-gap: 0.625rem;
 }
 
 .quote i {
-  font-size: 3rem;
+  font-size: 1.6rem;
   color: #ddd;
 }
 
 .quote-text {
-  font-size: clamp(1.6rem, 2cqi, 2.5rem);
+  font-size: clamp(1rem, 1.8cqi, 1.2rem);
   color: #ddd;
-  line-height: 3rem;
+  line-height: 1.875rem;
   text-align: center;
-  letter-spacing: 0.1rem;
-  width: clamp(25rem, 35cqi, 50rem);
+  letter-spacing: 1px;
+  width: clamp(15.625rem, 35cqi, 31.25rem);
 }
 
 .quote-author {
   font-family: "Briem Hand", cursive;
-  font-size: 1.4rem;
+  font-size: 0.875rem;
   color: #888;
   text-align: right;
 }
@@ -79,27 +80,27 @@
 
 .buttons {
   position: absolute;
-  bottom: 6rem;
+  bottom: 3.75rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  column-gap: 2rem;
+  column-gap: 1.25rem;
 }
 
 .btn {
-  width: 18rem;
-  height: 4rem;
-  border-radius: 2rem;
+  width: 12rem;
+  height: 2.5rem;
+  border-radius: 1.25rem;
   border: none;
   font-family: "Comfortaa", sans-serif;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 0.1rem;
+  letter-spacing: 1px;
   color: #fff;
   cursor: pointer;
-  box-shadow: 3rem 1rem 4rem rgba(0, 0, 0, 0.3);
-  text-shadow: -0.3rem 0.5rem 1rem rgba(0, 0, 0, 0.3);
+  box-shadow: 1.875rem 0.625rem 2.5rem rgba(0, 0, 0, 0.3);
+  text-shadow: -0.2rem 0.3rem 0.6rem rgba(0, 0, 0, 0.3);
 }
 
 .btn:active {
@@ -121,30 +122,34 @@
 }
 
 .circle-1 {
-  width: clamp(5rem, 10cqi, 16rem);
+  width: clamp(3.125rem, 10cqi, 10rem);
   background-image: linear-gradient(to top, #ffac24, #ffd780);
+  opacity: 0.8;
   top: -6cqi;
   left: 50%;
 }
 
 .circle-2 {
-  width: clamp(2rem, 4cqi, 6rem);
+  width: clamp(1.25rem, 4cqi, 3.75rem);
   background-image: linear-gradient(to top, #ffac24, #ffd780);
-  bottom: 15rem;
-  left: 7rem;
+  opacity: 0.8;
+  bottom: 9rem;
+  left: 4rem;
 }
 
 .circle-3 {
-  width: clamp(5rem, 10cqi, 16rem);
+  width: clamp(3.125rem, 10cqi, 10rem);
   background-image: linear-gradient(to right, #553ddd, #7f69e8);
+  opacity: 0.6;
   top: 50%;
   right: -5cqi;
 }
 
 .circle-4 {
-  width: clamp(1rem, 1cqi, 2rem);
+  width: clamp(0.625rem, 1cqi, 1.25rem);
   background-image: linear-gradient(to left, #dd133f, #fd4069);
-  top: 30%;
+  opacity: 0.6;
+  top: 25%;
 }
 
 .favourites {
@@ -153,76 +158,77 @@
   position: absolute;
   inset: 0;
   background-image: linear-gradient(to left, #1b9b96, #2e6f79);
-  padding: 3rem 7rem 3rem 3rem;
+  padding: 2rem 4rem 2rem 2rem;
+  /* overflow-y: auto; */
+}
+
+.favourites-inner {
   overflow-y: auto;
+  max-height: 100%;
+  padding-bottom: 2rem;
 }
 
-.favourites::-webkit-scrollbar {
-  width: 0.8rem;
-}
-
-.favourites::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-.favourites::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 0.4rem;
-}
-
-.favourites::-webkit-scrollbar-thumb:hover {
-  background: #555;
+.favourites-inner::-webkit-scrollbar {
+  width: 0;
 }
 
 .fav-quote {
   display: flex;
-  column-gap: 1rem;
-  margin-bottom: 2rem;
+  column-gap: 0.625rem;
+  margin-bottom: 1.25rem;
 }
 
 .btn-close {
   position: absolute;
-  top: 3rem;
-  right: 2rem;
+  top: 1.875rem;
+  right: 1.25rem;
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
 .btn-close i {
-  font-size: 3rem;
-  color: #fff;
-}
-
-.fav-quote-delete {
-  font-size: 2.5rem;
-  color: #f06b5f;
-  cursor: pointer;
-}
-
-.fav-quote-text {
   font-size: 1.6rem;
   color: #fff;
 }
 
+.fav-quote-delete {
+  font-size: 1.6rem;
+  color: #f06b5f;
+  cursor: pointer;
+}
+
+.fav-quote-content {
+  flex: 1;
+}
+
+.fav-quote-text {
+  font-size: 1rem;
+  color: #fff;
+}
+
 .fav-quote-author {
+  font-size: 0.8rem;
   font-family: "Briem Hand", cursive;
   text-align: right;
   color: #ddd;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 768px) {
   .quotes-app {
-    width: 75vmin;
     aspect-ratio: 2/3;
+    aspect-ratio: 4/5;
+    aspect-ratio: 5/6;
   }
 }
-@media (max-width: 550px) {
+
+@media (max-width: 640px) {
   .quotes-app {
     aspect-ratio: 1/2;
+    aspect-ratio: 2/3;
   }
   .buttons {
     flex-direction: column;
-    row-gap: 2rem;
+    row-gap: 1.25rem;
   }
 }

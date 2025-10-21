@@ -1,18 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const QuotesApp = () => {
   const [quote, setQuote] = useState({
     text: 'Ask not what your country can do for you; ask what you can do for your country',
     author: 'John Kennedy',
   });
-  const [favourites, setFavourites] = useState([]);
+  const [favourites, setFavourites] = useState(() => {
+    const savedFavs = localStorage.getItem('fav-quotes');
+    return savedFavs ? JSON.parse(savedFavs) : [];
+  });
   const [showFavourites, setShowFavourites] = useState(false);
 
   const fetchNewQuote = async () => {
     const url = 'https://dummyjson.com/quotes/random';
     const response = await fetch(url);
     const data = await response.json();
-    // console.log(data);
     setQuote({
       author: data.author,
       text: data.quote,
@@ -28,9 +30,15 @@ const QuotesApp = () => {
       (fav) => fav.text === quote.text && fav.author === quote.author
     );
     if (!isInFavourites) {
-      setFavourites([...favourites, quote]);
+      const newFavourites = [quote, ...favourites];
+      setFavourites(newFavourites);
+      localStorage.setItem('fav-quotes', JSON.stringify(newFavourites));
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem('fav-quotes', JSON.stringify(favourites));
+  }, [favourites]);
 
   return (
     <div className="container">
@@ -59,23 +67,27 @@ const QuotesApp = () => {
         </div>
         {showFavourites && (
           <div className="favourites">
-            <button className="btn-close" onClick={toggleFavourites}>
-              <i className="bx bx-x"></i>
-            </button>
-            {favourites.map((favQuote, index) => (
-              <div className="fav-quote" key={index}>
-                <div className="fav-quote-delete">
-                  <i
-                    className="bx bx-x-circle"
-                    onClick={() => setFavourites(favourites.filter((_, i) => i !== index))}
-                  ></i>
+            <div className="favourites-inner">
+              <button className="btn-close" onClick={toggleFavourites}>
+                <i className="bx bx-x"></i>
+              </button>
+              {favourites.map((favQuote, index) => (
+                <div className="fav-quote" key={index}>
+                  <div className="fav-quote-delete">
+                    <i
+                      className="bx bx-x-circle"
+                      onClick={() =>
+                        setFavourites(favourites.filter((_, i) => i !== index))
+                      }
+                    ></i>
+                  </div>
+                  <div className="fav-quote-content">
+                    <div className="fav-quote-text">{favQuote.text}</div>
+                    <div className="fav-quote-author">{favQuote.author}</div>
+                  </div>
                 </div>
-                <div className="fav-quote-content">
-                  <div className="fav-quote-text">{favQuote.text}</div>
-                  <div className="fav-quote-author">{favQuote.author}</div>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
       </div>
